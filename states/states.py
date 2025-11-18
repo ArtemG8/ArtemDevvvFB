@@ -1,8 +1,9 @@
-from aiogram.fsm.state import State, StatesGroup
+# states/states.py
+from aiogram.fsm.state import StatesGroup, State
 
-class RecordStates(StatesGroup):
-    """Состояния для записи времени потока и спринта."""
-    waiting_for_flow_duration = State()
-    waiting_for_sprint_duration = State()
-    flow_active = State()
-    flow_paused = State()
+class UserStates(StatesGroup):
+    waiting_for_feedback = State()
+
+class AdminStates(StatesGroup):
+    waiting_for_password = State()
+    in_admin_panel = State() # Можно добавить для будущих функций админки

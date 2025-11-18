@@ -1,15 +1,25 @@
+# config/config.py
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-class Config:
-    BOT_TOKEN: str = os.getenv("BOT_TOKEN")
-    DB_HOST: str = os.getenv("DB_HOST")
-    DB_PORT: str = os.getenv("DB_PORT")
-    DB_NAME: str = os.getenv("DB_NAME")
-    DB_USER: str = os.getenv("DB_USER")
-    DB_PASS: str = os.getenv("DB_PASS")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+ADMIN_ID = os.getenv("ADMIN_ID")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD")
 
-# Создаем экземпляр конфигурации
-conf = Config()
+# Проверяем, что все необходимые переменные окружения загружены
+if not BOT_TOKEN:
+    raise ValueError("BOT_TOKEN is not set in the .env file")
+if not ADMIN_ID:
+    raise ValueError("ADMIN_ID is not set in the .env file")
+if not ADMIN_PASSWORD:
+    raise ValueError("ADMIN_PASSWORD is not set in the .env file")
+
+# Преобразуем ADMIN_ID в int, так как он будет использоваться для сравнения с Telegram ID
+try:
+    ADMIN_ID = int(ADMIN_ID)
+except ValueError:
+    raise ValueError("ADMIN_ID must be an integer in the .env file")
+
+
