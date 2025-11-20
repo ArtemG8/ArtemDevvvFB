@@ -6,4 +6,4 @@ class UserStates(StatesGroup):
 
 class AdminStates(StatesGroup):
     waiting_for_password = State()
-    in_admin_panel = State() # Можно добавить для будущих функций админки
+    in_admin_panel = State()

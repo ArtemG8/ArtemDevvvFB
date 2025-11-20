@@ -1,4 +1,3 @@
-# handlers/private_user.py
 import logging
 from aiogram import Router, F, Bot
 from aiogram.filters import CommandStart, Command
@@ -19,8 +18,6 @@ def get_start_keyboard() -> InlineKeyboardMarkup:
         [
             InlineKeyboardButton(text=LEXICON_RU['feedback_channel_button'], url='https://t.me/ArtemDevvvfeedback'),
             InlineKeyboardButton(text=LEXICON_RU['leave_feedback_button'], callback_data='start_feedback'),
-
-
         ]
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
@@ -38,14 +35,14 @@ def get_feedback_sent_keyboard() -> InlineKeyboardMarkup:
     return keyboard
 
 
-# Этот хэндлер будет срабатывать на команду /start
+# Команда /start
 @router.message(CommandStart())
 async def process_start_command(message: Message, state: FSMContext):
     logger.info(f"User {message.from_user.id} started bot.")
     await state.clear() # Очищаем состояние, если пользователь вводит /start
     await message.answer(LEXICON_RU['start_message'], reply_markup=get_start_keyboard())
 
-# Этот хэндлер будет срабатывать на команду /cancel в любом состоянии, кроме админ-панели
+# Команда /cancel
 @router.message(Command(commands='cancel'), ~F.text.startswith('/admin'))
 async def process_cancel_command(message: Message, state: FSMContext):
     logger.info(f"User {message.from_user.id} canceled current action.")
@@ -105,6 +102,5 @@ async def process_main_menu_callback(callback: CallbackQuery, state: FSMContext)
     logger.info(f"User {callback.from_user.id} clicked 'Main Menu' button.")
     await callback.answer() # Отвечаем на callbackQuery
     await state.clear() # Убедимся, что состояние очищено
-    # Отправляем сообщения, как при /start, но с кнопкой "Оставить отзыв"
     await callback.message.answer(LEXICON_RU['start_message'], reply_markup=get_start_keyboard())
 

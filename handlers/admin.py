@@ -32,12 +32,10 @@ async def process_admin_password(message: Message, state: FSMContext):
         logger.info(f"Admin {message.from_user.id} granted access to admin panel.")
         await state.clear() # Очищаем состояние после успешного входа
         await message.answer(LEXICON_RU['admin_access_granted'])
-        # Теперь админ авторизован, и бот не будет перехватывать его сообщения
-        # как попытку ввода пароля.
     else:
         logger.warning(f"Admin {message.from_user.id} entered wrong password.")
         await message.answer(LEXICON_RU['admin_wrong_password'])
-        await message.answer(LEXICON_RU['admin_password_request']) # Просим ввести снова
+        await message.answer(LEXICON_RU['admin_password_request'])
 
 # Отмена действия в админке
 @router.message(Command(commands='cancel'), AdminStates.waiting_for_password)
