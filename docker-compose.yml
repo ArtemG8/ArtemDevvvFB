@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  feedback_bot:
+    build: .
+    container_name: feedback_telegram_bot
+    env_file:
+      - ./.env # Передаем переменные окружения из .env файла
+    restart: unless-stopped # Бот будет автоматически перезапускаться, если остановится
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
