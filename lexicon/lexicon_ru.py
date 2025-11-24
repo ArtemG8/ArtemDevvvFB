@@ -13,4 +13,5 @@ LEXICON_RU: dict[str, str] = {
     'feedback_channel_button': 'Канал с отзывами',
     'main_menu_button': 'Главное меню',
     'leave_feedback_button': 'Оставить отзыв',
+    'main_channel': 'Канал с проектами',
 }

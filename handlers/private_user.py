@@ -17,6 +17,10 @@ def get_start_keyboard() -> InlineKeyboardMarkup:
     buttons = [
         [
             InlineKeyboardButton(text=LEXICON_RU['feedback_channel_button'], url='https://t.me/ArtemDevvvfeedback'),
+            InlineKeyboardButton(text=LEXICON_RU['main_channel'], url='https://t.me/ArtemDevvv'),
+        ],
+
+        [
             InlineKeyboardButton(text=LEXICON_RU['leave_feedback_button'], callback_data='start_feedback'),
         ]
     ]
@@ -28,7 +32,7 @@ def get_feedback_sent_keyboard() -> InlineKeyboardMarkup:
     buttons = [
         [
             InlineKeyboardButton(text=LEXICON_RU['feedback_channel_button'], url='https://t.me/ArtemDevvvfeedback'),
-            InlineKeyboardButton(text=LEXICON_RU['main_menu_button'], callback_data='main_menu')
+            InlineKeyboardButton(text=LEXICON_RU['main_menu_button'], callback_data='main_menu'),
         ]
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
